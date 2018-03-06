@@ -15,7 +15,7 @@ use strict;
 use testapi;
 use utils qw(zypper_call);
 
-sub run {
+sub install_webui {
     select_console('root-console');
     zypper_call('in openQA');
     assert_script_run('systemctl start openqa-webui');
@@ -24,6 +24,12 @@ sub run {
     assert_script_run('systemctl status openqa-scheduler');
     assert_script_run('systemctl status openqa-resource-allocator');
     select_console('x11');
+}
+
+sub run {
+    install_webui();
+
+    x11_start_program('firefox http://localhost');
 }
 
 1;
