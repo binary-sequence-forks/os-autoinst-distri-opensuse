@@ -22,7 +22,7 @@ sub install_webui {
 
 sub configure_webui {
     select_console('root-console');
-    assert_script_run('a2enmod headers proxy proxy_http proxy_wstunnel');
+    assert_script_run('a2enmod {headers,proxy,proxy_http,proxy_wstunnel}');
     assert_script_run('cp /etc/apache2/vhosts.d/openqa.conf.template /etc/apache2/vhosts.d/openqa.conf');
     assert_script_run('systemctl start openqa-webui');
     assert_script_run('systemctl status apache2');
