@@ -13,9 +13,17 @@
 use base "x11test";
 use strict;
 use testapi;
+use utils qw(zypper_call);
 
 sub run {
+    select_console('root-console');
     zypper_call('in openQA');
+    assert_script_run('systemctl start openqa-webui');
+    assert_script_run('systemctl status openqa-webui');
+    assert_script_run('systemctl status openqa-websockets');
+    assert_script_run('systemctl status openqa-scheduler');
+    assert_script_run('systemctl status openqa-resource-alocator');
+    select_console('x11');
 }
 
 1;
