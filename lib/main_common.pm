@@ -1286,6 +1286,7 @@ sub load_extra_tests {
                 loadtest "x11/multi_users_dm";
             }
 
+            loadtest 'x11/openqa' unless is_leap;
         }
         # the following tests care about network and need some DE specific
         # needles. For now we only have them for gnome and do not want to
