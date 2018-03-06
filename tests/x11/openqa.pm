@@ -18,18 +18,29 @@ use utils qw(zypper_call);
 sub install_webui {
     select_console('root-console');
     zypper_call('in openQA');
+}
+
+sub configure_webui {
+    select_console('root-console');
+    assert_script_run('a2enmod headers proxy proxy_http proxy_wstunnel');
+    assert_script_run('cp /etc/apache2/vhosts.d/openqa.conf.template /etc/apache2/vhosts.d/openqa.conf');
     assert_script_run('systemctl start openqa-webui');
-    assert_script_run('systemctl status openqa-webui');
+    assert_script_run('systemctl status apache2');
+    assert_script_run('systemctl status openqa-resource-allocator');
     assert_script_run('systemctl status openqa-websockets');
     assert_script_run('systemctl status openqa-scheduler');
-    assert_script_run('systemctl status openqa-resource-allocator');
+    assert_script_run('systemctl status openqa-webui');
+}
+
+sub assert_webui_login {
     select_console('x11');
+    x11_start_program('firefox http://localhost');
 }
 
 sub run {
     install_webui();
-
-    x11_start_program('firefox http://localhost');
+    configure_webui();
+    assert_webui_login();
 }
 
 1;
