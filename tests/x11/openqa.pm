@@ -25,11 +25,11 @@ sub configure_webui {
     assert_script_run('for mod in headers proxy proxy_http proxy_wstunnel; do a2enmod $mod; done');
     assert_script_run('cp /etc/apache2/vhosts.d/openqa.conf.template /etc/apache2/vhosts.d/openqa.conf');
     assert_script_run('systemctl start openqa-webui');
-    assert_script_run('systemctl status apache2');
-    assert_script_run('systemctl status openqa-resource-allocator');
-    assert_script_run('systemctl status openqa-websockets');
-    assert_script_run('systemctl status openqa-scheduler');
-    assert_script_run('systemctl status openqa-webui');
+    assert_script_run('systemctl --no-pager status apache2');
+    assert_script_run('systemctl --no-pager status openqa-resource-allocator');
+    assert_script_run('systemctl --no-pager status openqa-websockets');
+    assert_script_run('systemctl --no-pager status openqa-scheduler');
+    assert_script_run('systemctl --no-pager status openqa-webui');
 }
 
 sub assert_webui_login {
