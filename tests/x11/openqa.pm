@@ -22,7 +22,7 @@ sub run {
     assert_script_run('systemctl status openqa-webui');
     assert_script_run('systemctl status openqa-websockets');
     assert_script_run('systemctl status openqa-scheduler');
-    assert_script_run('systemctl status openqa-resource-alocator');
+    assert_script_run('systemctl status openqa-resource-allocator');
     select_console('x11');
 }
 
