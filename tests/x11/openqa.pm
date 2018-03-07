@@ -34,7 +34,7 @@ sub configure_webui {
 
 sub assert_webui_login {
     select_console('x11');
-    x11_start_program('firefox http://localhost');
+    x11_start_program('firefox http://localhost', 60, { valid => 1 } );
 }
 
 sub run {
